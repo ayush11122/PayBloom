@@ -3,7 +3,7 @@ const zod = require('zod');
 const { User, Account } = require('../db/db');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const JWT_SCERET = require('../config');
+const JWT_SECRET = require('../config');
 const { authMiddleware } = require('../middleware');
 
 const signupSchema = zod.object({
@@ -25,7 +25,7 @@ const userupdateSchema = zod.object({
 });
 
 
-router.post('/signup', async (req,res)=> {
+router.post("/signup", async (req,res)=> {
     const  body = req.body;
     const check = signupSchema.safeParse(body);
     if(!check.success){
@@ -33,10 +33,10 @@ router.post('/signup', async (req,res)=> {
             message: "Incorrect inputs"
         })
     }
-    const usercheck = User.findOne({
+    const usercheck = await User.findOne({
         username: body.username 
     })
-    if(usercheck._id)
+    if(usercheck)
     {
         return res.status(411).json({
             message: "Username or email is already exists"
@@ -51,7 +51,7 @@ router.post('/signup', async (req,res)=> {
         balance: money
     })
 
-    const token = jwt.sign({userId: addUser._id}, JWT_SCERET)
+    const token = jwt.sign({userId: addUser._id}, JWT_SECRET)
     res.status(201).json({
         message: "User created successfully",
         user: addUser,
@@ -101,9 +101,16 @@ router.put('/',authMiddleware, async (req,res)=>{
 router.get('/bulk', async (req, res)=>{
     const filter = req.query.filter;
     const user = await User.find({
-        $or: [
-          { "$regex": filter },     //regex is for if anysubstring not only full string matches
-          { "$regex": filter }
+        $or: [{
+            firstname:
+             { 
+                "$regex": filter
+             }},     //regex is for if anysubstring not only full string matches
+          {
+            lastname:
+             { 
+                "$regex": filter 
+            }}
         ]
       })
       res.status(200).json({

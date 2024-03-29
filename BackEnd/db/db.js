@@ -17,12 +17,12 @@ const UserSchema = mongoose.Schema({
         minLength: 6,
     }, 
     firstname: {
-        Type: String,
+        type: String,
         required: true,
         maxLength: 40
     },
     lastname: {
-        Type:String,
+        type: String,
         required: false,
         maxLength: 40
     }
@@ -41,7 +41,7 @@ const AccountSchema = mongoose.Schema({
 })
 
 const User = mongoose.model('User', UserSchema);
-const Account = mongoose.model('Account', accountSchema);
+const Account = mongoose.model('Account', AccountSchema);
 
 module.exports = {
     User, Account

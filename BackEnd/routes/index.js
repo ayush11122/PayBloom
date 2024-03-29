@@ -4,7 +4,7 @@ const UserRouter = require('./user');
 const AccountRouter = require('./account');
 
 
-router.use('api/v1/users', UserRouter);
-router.use('api/v1/accounts', AccountRouter);
+router.use('/users', UserRouter);
+router.use('/accounts', AccountRouter);
 
 module.exports = router;
