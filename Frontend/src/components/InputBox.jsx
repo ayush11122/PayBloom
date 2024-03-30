@@ -5,7 +5,11 @@ export default function InputBox(props){
         </label>
         <br />
         <div className="flex justify-center items-center py-2">
-        <input type="text" placeholder={props.InputBoxData} className="border rounded-xs  w-full h-10" />
+        <input 
+        onChange={props.onChange}
+        type="text"
+         placeholder={props.InputBoxData} 
+         className="border rounded-xs  w-full h-10" />
         </div>
     </div>
 }
