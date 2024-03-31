@@ -3,8 +3,9 @@ const zod = require('zod');
 const { User, Account } = require('../db/db');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = require('../config');
 const { authMiddleware } = require('../middleware');
+require('dotenv').config();
+const jwtSecret = process.env.JWT_SECRET;
 
 const signupSchema = zod.object({
     username: zod.string().email(),
@@ -23,6 +24,24 @@ const userupdateSchema = zod.object({
     lastname: zod.string().optional(),
     password: zod.string().min(3).max(20).optional()
 });
+
+router.get('/me', authMiddleware, async (req, res)=>{
+    const userId = req.userId;
+    const user = await User.findOne({_id: userId});
+    if(user){
+        res.status(200).json({
+            firstname:user.firstname,
+            lastname:user.lastname
+    })
+    }
+    else{
+        return res.status(411).json({
+            message: "User not found"
+        })
+    }
+});
+
+
 
 
 router.post("/signup", async (req,res)=> {
@@ -51,7 +70,7 @@ router.post("/signup", async (req,res)=> {
         balance: money
     })
 
-    const token = jwt.sign({userId: addUser._id}, JWT_SECRET)
+    const token = jwt.sign({userId: addUser._id}, jwtSecret)
     res.status(201).json({
         message: "User created successfully",
         user: addUser,
@@ -77,14 +96,15 @@ router.post('/signin',async (req, res)=>{
             message: "Error while logging in"
         })
     }
-    const token = jwt.sign({userId: usercheck._id}, JWT_SECRET)
+    const token = jwt.sign({userId: usercheck._id}, jwtSecret)
     res.status(201).json({
         message: "User logged in successfully", 
-        token: token
+        token: token,
+        name: usercheck.firstname + " " + usercheck.lastname
     })
 })
 
-router.put('/',authMiddleware, async (req,res)=>{
+router.put('/update',authMiddleware, async (req,res)=>{
     const body = req.body;
     const check = userupdateSchema.safeParse(body);
     if(!check.success){

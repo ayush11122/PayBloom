@@ -48,17 +48,21 @@ export default function signup() {
       />
       <Button
       onClick={async ()=>{
-        const response = await axios.post('http://localhost:3001/api/v1/users/signup', {
+         await axios.post('http://localhost:3001/api/v1/users/signup', {
           firstname: firstname,
           lastname: lastname,
           username: username,
           password: password
-        })
-        localStorage.setItem("token", response.data.token)
-        // localStorage.removeItem("token")   use for logout
-        setTimeout(()=>{
-          navigate("/dashboard")
-      },1000)
+        }).then((res) => {
+          alert(res.data.message)
+          // localStorage.removeItem("token")   use for logout
+          setTimeout(()=>{
+            console.log("token has been")
+            navigate("/signin")
+        },1000)
+        }).catch((res)=>{
+          alert(res.response.data.message)
+        });
       }}
         Text="Sign Up"
         

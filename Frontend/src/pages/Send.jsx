@@ -50,14 +50,18 @@ export default function Send() {
                                     amount: amount
                                 },{
                                     headers:{
-                                        Authorization: "Bearer " + localStorage.getItem("token")
+                                        Authorization: "Bearer " + sessionStorage.getItem("token")
                                     }
                                 }
-                                )
+                                ).then((res)=>{
+                                    alert(res.data.message)
+                                }).catch((err)=>{
+                                    alert(err.response.data.message)
+                                })
                                 setTimeout(()=>{
                                     navigate("/dashboard")
                                 },1000)
-                                
+                            
                             }}
                         className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                             Initiate Transfer

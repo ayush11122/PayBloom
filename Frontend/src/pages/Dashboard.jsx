@@ -8,11 +8,9 @@ export default function Dashboard(){
     useEffect(() =>{
         axios.get('http://localhost:3001/api/v1/accounts/balance',{
             headers:{
-                Authorization: "Bearer " + localStorage.getItem("token")
+                Authorization: "Bearer " + sessionStorage.getItem("token")
             }
-        }
-        
-        )
+        })
            .then(response =>{
                 setBalance(response.data.balance);
             })

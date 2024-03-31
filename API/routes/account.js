@@ -8,7 +8,6 @@ router.get("/balance", authMiddleware, async (req, res)=>{
     const userId = req.userId;
     const account = await Account.findOne({userId: userId});
     res.status(200).json({
-        message: "Balance fetched successfully",
         balance: account.balance
     })
 })
@@ -24,6 +23,11 @@ router.post("/transfer", authMiddleware, async (req, res)=>{
     if(fromAccount.balance < amount || !fromAccount.balance){
         return res.status(411).json({
             message: "Insufficient balance"
+        })
+    }
+    if(amount<= 0 || !amount){
+        return res.status(411).json({
+            message: "Invalid amount"
         })
     }
     if(!toAccount.balance){
