@@ -18,7 +18,7 @@ export default function AppBar() {
         <div className="flex items-center space-x-4">
             <div className="text-white text-sm">Hello, {Name[0]} </div>
             <div className="bg-gray-200 rounded-full w-10 h-10 flex items-center justify-center text-sm text-gray-600">
-                {Name[0][0].toUpperCase()}{Name[1][1].toUpperCase()} 
+                {Name[0][0].toUpperCase()}{Name[1][0].toUpperCase()} 
             </div>
             <button 
                 onClick={handleLogout}

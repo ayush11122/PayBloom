@@ -1,20 +1,16 @@
-const express = require('express');
-const { authMiddleware } = require('../middleware');
-const router = express.Router();
 const {Account} = require('../db/db');
 const mongoose = require('mongoose');
 
-router.get("/balance", authMiddleware, async (req, res)=>{
+const balance = async (req, res)=>{
     const userId = req.userId;
     const account = await Account.findOne({userId: userId});
     res.status(200).json({
         balance: account.balance
     })
-})
+}
 
-router.post("/transfer", authMiddleware, async (req, res)=>{
-  
-    // try{
+const transfer = async (req, res)=>{
+
     const session = await mongoose.startSession();
     session.startTransaction();
     const { to , amount} = req.body;
@@ -46,28 +42,14 @@ router.post("/transfer", authMiddleware, async (req, res)=>{
             balance: -amount
         }
     }).session(session);
-
     await session.commitTransaction();
-
     res.status(200).json({
         message: "Transfer completed successfully"
     })
-// }
-    // catch(err){
-        // res.status(500).json({
-        //     message: "Error while transferring"
-        // });
-    // }
-});
+};
 
 
-
-
-
-
-
-
-
-
-
-module.exports = router;
+module.exports = {
+    balance,
+    transfer
+}

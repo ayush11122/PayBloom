@@ -34,7 +34,6 @@ export default function signup() {
             username: username,
             password: password
           }).then((res) => {
-            console.log(res.token);
             sessionStorage.setItem("token", res.data.token)
             sessionStorage.setItem("name",res.data.name)
             alert(res.data.message)

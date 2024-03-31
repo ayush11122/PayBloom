@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SCERET } = require('./config');
+const jwtSecret = process.env.JWT_SECRET;
 
 const authMiddleware = (req, res, next) =>{
     const authHeader = req.headers.authorization;
@@ -10,7 +10,7 @@ const authMiddleware = (req, res, next) =>{
     }
     const token = authHeader.split(' ')[1];
     try{
-    const decoded = jwt.decode(token, JWT_SCERET);
+    const decoded = jwt.decode(token, jwtSecret);
         req.userId = decoded.userId;
         next();
     }

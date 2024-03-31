@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const  dotenv = require('dotenv');
+dotenv.config();
 
 mongoose.connect('mongodb+srv://adminayush:ayushayu@cluster0.ldeh2qv.mongodb.net/PayBloom');
 
