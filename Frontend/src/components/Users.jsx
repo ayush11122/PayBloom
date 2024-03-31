@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { APP_URL } from "../config";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ export default function Users() {
   let timer ;
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/v1/users/bulk/?filter=${filter}`)
+      .get(`${APP_URL}/api/v1/users/bulk/?filter=${filter}`)
       .then((response) => {
         setUsers(response.data.users);
       });

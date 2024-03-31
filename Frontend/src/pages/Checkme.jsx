@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import { APP_URL } from "../config";
+
 
 
 export default function Checkme (){
     const navigate= useNavigate();
     const response = () => { 
-        const res = axios.get('http://localhost:3001/api/v1/users/me',
+        const res = axios.get(`${APP_URL}/api/v1/users/me`,
     {
         headers:{
             Authorization: "Bearer " + sessionStorage.getItem("token")

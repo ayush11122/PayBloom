@@ -6,6 +6,7 @@ import InputBox from '../components/InputBox';
 import SubHeading from '../components/SubHeading';
 import SwitchButton from '../components/SwitchButton';
 import axios from 'axios';
+import { APP_URL } from '../config';
 export default function signup() {
   const [username, setUsername] = useState(0);
   const [password, setPassword] = useState();
@@ -30,7 +31,7 @@ export default function signup() {
       />
       <Button
         onClick={() => {
-          axios.post('http://localhost:3001/api/v1/users/signin', {
+          axios.post(`${APP_URL}/api/v1/users/signin`, {
             username: username,
             password: password
           }).then((res) => {

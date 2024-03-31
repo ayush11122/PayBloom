@@ -1,6 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useState } from "react";
+import { APP_URL } from "../config";
 
 export default function Send() {
     const [searchParmas] = useSearchParams();
@@ -45,7 +46,7 @@ export default function Send() {
                         </div>
                         <button 
                             onClick={()=>{
-                                axios.post('http://localhost:3001/api/v1/accounts/transfer',{
+                                axios.post(`${APP_URL}/api/v1/accounts/transfer`,{
                                     to: id,
                                     amount: amount
                                 },{
