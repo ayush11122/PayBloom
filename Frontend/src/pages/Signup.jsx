@@ -51,12 +51,13 @@ export default function signup() {
           onClick={async () => {
             await axios
               .post(`${APP_URL}/api/v1/users/signup`, {
-                firstname: firstname,
-                lastname: lastname,
+                firstname: firstname.trim(),
+                lastname: lastname.trim(),
                 username: username,
                 password: password,
               })
               .then((res) => {
+                // console.log(res);
                 sessionStorage.setItem("token", res.data.token);
                 sessionStorage.setItem("name", res.data.name);
                 alert(res.data.message);
