@@ -35,7 +35,7 @@ const signUp = async (req, res) => {
   });
   if (userCheck) {
     return res.status(411).json({
-      message: "Username or email is already exists",
+      message: "Email is already exists",
     });
   }
 
