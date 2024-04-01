@@ -24,13 +24,13 @@ export default function Users() {
 
   return (
     <>
-      <div className="font-bold mt-6 px-40 text-lg">Users</div>
+        <div className="font-bold mt-6 md:px-20 xl:px-28 2xl:px-40 text-lg">Users</div>
       <div className="my-2 flex justify-center">
         <input
           onChange={(e) => handleInput(e)}
           type="text"
           placeholder="Search users..."
-          className="w-3/4 px-2 py-1 border rounded border-slate-200 focus:outline-none focus:border-blue-500"
+          className="w-full md:w-3/4 px-2 py-1 border rounded border-slate-200 focus:outline-none focus:border-blue-500"
         />
       </div>
       <div>
@@ -47,13 +47,13 @@ function User({ user }) {
 
   return (
     <div className="flex justify-center">
-      <div className="flex justify-between my-4 w-3/4 bg-gray-100 rounded-lg p-4 hover:shadow-md">
+      <div className="flex justify-between my-4 w-3/4 bg-gray-100 rounded-lg p-2 md:p-4 hover:shadow-md">
         <div className="flex items-center space-x-4">
-          <div className="rounded-full h-10 w-10 bg-slate-200 flex justify-center items-center text-xl">
+          <div className="rounded-full h-6 w-6 text-sm md:h-10 md:w-10 md:text-xl bg-slate-200 flex justify-center items-center ">
             {user.firstname[0].toUpperCase()}
           </div>
           <div className="flex flex-col">
-            <div className="font-semibold">
+            <div className=" text-xs font-medium md:text-lg md:font-semibold">
               {user.firstname} {user.lastname}
             </div>
           </div>
@@ -64,7 +64,7 @@ function User({ user }) {
               navigate(`/send?id=${user._id}&name=${user.firstname}`)
             }
             type="button"
-            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg focus:outline-none"
+            className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 text-xs md:px-4 md:py-2 md:text-lg rounded-lg focus:outline-none"
           >
             Send Money
           </button>
