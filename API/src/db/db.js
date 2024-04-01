@@ -25,7 +25,7 @@ const UserSchema = mongoose.Schema({
     },
     lastname: {
         type: String,
-        required: false,
+        required: true,
         maxLength: 40
     }
 });

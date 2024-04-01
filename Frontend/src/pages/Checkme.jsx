@@ -21,13 +21,15 @@ export default function Checkme (){
     })
 }
     return <>
-            <div className="bg-gray-100 min-h-screen flex justify-center items-center">
+         <div className="bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen flex justify-center items-center">
       <div className="max-w-md p-8 bg-white shadow-md rounded-lg">
-        <h1 className="text-3xl font-semibold mb-4">Welcome PayBloom </h1>
-        <p className="text-gray-700 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper nulla vel velit tincidunt, ac euismod turpis accumsan.</p>
+        <h1 className="text-3xl font-semibold mb-4 text-center text-gray-800">Welcome to <span className="text-blue-600">PayBloom</span></h1>
+        <p className="text-gray-700 mb-6 text-center">Welcome to PayBloom, your virtual payment platform. Send and receive virtual money instantly, simplifying your transactions with ease and convenience.</p>
         <button onClick={response}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md">Get Started</button>
+        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-md w-full transition duration-300 ease-in-out transform hover:scale-105">Get Started</button>
       </div>
     </div>
+
+
     </>
 }
